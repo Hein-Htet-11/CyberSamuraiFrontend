@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-row>
+    <v-row justify="start">
       <!-- SideBar Menu -->
-      <v-col cols="2.5">
+      <v-col cols="3">
         <v-list dense nav>
-            <v-row justify="start">
+            <v-row justify="start" class="space px-16 pb-5">
               
     <v-expansion-panels>
       <v-expansion-panel>
@@ -44,7 +44,7 @@
     </v-expansion-panels>
  
   </v-row>
-        <v-row justify="start">
+        <v-row justify="start" class="space px-16 pb-5">
           
     <v-expansion-panels>
       <v-expansion-panel>
