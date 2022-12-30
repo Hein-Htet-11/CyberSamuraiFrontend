@@ -1,15 +1,60 @@
 <template>
   <div>
-    <v-row justify="start">
-      <!-- SideBar Menu -->
-      <v-col cols="3">
-        <v-list dense nav>
-            <v-row justify="start" class="space px-16 pb-5">
-              
-    <v-expansion-panels>
+    <v-row justify="center" class="space px-16 pb-5">
+            <v-col justify="center" class="space px-1 pb-5">
+              <v-navigation-drawer
+        absolute
+        bottom
+        permanent
+        color="#232323"
+      >
+        <v-list
+          nav
+          dense
+        >
+      <v-expansion-panels
+    class="mx-auto"
+    dark
+    hover
+    popout
+    >
+      
       <v-expansion-panel>
         <v-expansion-panel-header>
+         
+          <v-list-item-icon>
+                <v-icon
+      color="grey darken-2"
+    >
+      mdi-gamepad
+    </v-icon>
+         </v-list-item-icon>
 
+                <v-list-item-content>
+                  <v-list-item-title>Platform</v-list-item-title>
+                </v-list-item-content>
+              
+  </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-list dense nav>
+              <v-list-item
+                v-for="(platform, index) in gamePlatformList"
+                :key="index"
+                link
+                @click="onClickPlatform(platform)"
+              >
+                <v-list-item-content>
+                  <v-list-item-title>{{ platform.name }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-expansion-panel-content>
+      
+    </v-expansion-panel>
+
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          <v-list-item link>
           <v-list-item-icon>
                 <v-icon
       color="grey darken-2"
@@ -17,7 +62,7 @@
       mdi-controller
     </v-icon>
          </v-list-item-icon>
-
+</v-list-item>
                 <v-list-item-content>
                   <v-list-item-title>Category</v-list-item-title>
                 </v-list-item-content>
@@ -37,95 +82,66 @@
                 </v-list-item-content>
               </v-list-item>
             </v-list>
-
-        </v-expansion-panel-content>
+          </v-expansion-panel-content>
       
-      </v-expansion-panel>
-    </v-expansion-panels>
- 
-  </v-row>
-        <v-row justify="start" class="space px-16 pb-5">
-          
-    <v-expansion-panels>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
+    </v-expansion-panel>
 
-<v-list-item-icon>
-      <v-icon
-color="grey darken-2"
->
-mdi-gamepad
-</v-icon>
-</v-list-item-icon>
-
-      <v-list-item-content>
-        <v-list-item-title>Platform</v-list-item-title>
-      </v-list-item-content>
-
-</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <v-list dense nav>
-              <v-list-item
-                v-for="(platform, index) in gamePlatformList"
-                :key="index"
-                link
-                @click="onClickPlatform(platform)"
-              >
-                <v-list-item-content>
-                  <v-list-item-title>{{ platform.name }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
-  </v-row>
-        
-      
+       
+      </v-expansion-panels>
     </v-list>
+      </v-navigation-drawer>
       </v-col>
 
       <!-- Game List -->
-      
-        <v-row justify="center" class="space px-16 pb-5">
-
-          <v-col cols="12" xs="12" sm="6" md="4" v-for="(game, index) in gameList" :key="index">
-            <v-card class="mx-auto rounded-xl" max-width="300" color="" flat outlined @click="goToGameDetails(game)" height="500">
+        
+          <v-col align-self="start" class="space px-1 pb-5" cols="12" xl="3" sm="8" md="3" offset-md="1" lg="3" offset-lg="1"  v-for="(game, index) in gameList" :key="index">
+              
+            <v-card class="mx-auto rounded-xl" max-width="300" dark flat outlined @click="goToGameDetails(game)" height="500">
+              
               <v-card-text>
+                
                 <div align="center" justify="center">
+                  
                 <v-img
                   :src="localDomain + game.posterPath"
-                  max-height="300"
-                  max-width="300"
+                  max-height="270"
+                  max-width="270"
                   contain
                   cover
-                ></v-img>
+                >
+                <v-card-title v-show="game.out_of_stock">
+                <v-alert dense outlined shaped type="error">Out of Stock</v-alert>
+              </v-card-title>
+              </v-img>
                 </div>
-                <v-card-title class="">{{ game.title }}</v-card-title>
+                <v-card-title class="yellow--text">{{ game.title }}</v-card-title>
                 <v-card-title class="grey--text text-grey-darken-1 caption mt-n4">{{ game.category.name}}</v-card-title>
-                <v-card-title class="mt-n4">{{ game.budget }} Kyat</v-card-title>
+                <v-card-title class="yellow--text mt-n4">{{ game.budget }} Kyat</v-card-title>
                 <v-card-title class="grey--text text-grey-darken-1 caption mt-n4">{{ game.platform.name}}</v-card-title>
-                <!-- <v-card-title class="grey--text text-grey-darken-1 caption mt-n4" v-show="game.out_of_stock">Out of Stock</v-card-title> -->
+                
                 <v-card-actions class="mx-2 mt-n4">
           <v-btn outlined class="mt-n2 add">
             <v-icon color="green" @click="decrement"> mdi-minus </v-icon>
           </v-btn>
 
-          <strong class="mx-2" v-text="bpm"></strong>
+          <strong class="white--text mx-2" v-text="bpm"></strong>
           <v-btn outlined class="mt-n2 add">
             <v-icon color="green" @click="increment"> mdi-plus </v-icon>
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn class="mx-2 mt-n3" fab dark small color="red">
+          <v-btn class="mx-2 mt-n3"  fab dark small color="green">
+            <v-icon dark> mdi-cart </v-icon>
+          </v-btn>
+          <v-btn class="mx-2 mt-n3"  fab dark small color="red">
             <v-icon dark> mdi-heart </v-icon>
           </v-btn>
+          
         </v-card-actions>
               </v-card-text>
             </v-card>
           </v-col>
-        </v-row>
-      
+          
+        
     </v-row>
   </div>
 </template>

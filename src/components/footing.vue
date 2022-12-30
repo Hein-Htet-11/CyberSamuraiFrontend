@@ -4,10 +4,7 @@
       <v-row>
         <v-col cols="12" xs="12" sm="6" md="4" class="pa-16">
           <v-toolbar color="transparent" flat>
-            <v-badge color="#ffffff" dot>
-              <v-img src="" contain width="30"></v-img>
-            </v-badge>
-
+            
             <v-toolbar-title class="ml-4">
               <span class="yellow--text">Cyber</span><strong>Samurai</strong>
             </v-toolbar-title>
@@ -47,7 +44,7 @@ export default {
   data: () => ({
     icons: [
       "mdi-phone",
-      "mdi-google",
+      "mdi-gmail",
       "mdi-instagram",
       "mdi-facebook",
     ],

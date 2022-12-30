@@ -15,15 +15,17 @@
       <v-col cols="7">
         <div class="text-h3">{{ game.title }}</div>
         <div class="text-caption ml-2 my-2">{{ game.category.name }}</div>
+        <div class="text-caption ml-2 my-2">{{ game.platform.name }}</div>
         <div class="text-body-1 ml-2 my-2">{{ game.budget }} Kyat</div>
-        <div v-show="game.adult" class="text-body-1 ml-2 my-2">Adult</div>
-        <v-card class="text-body-1 ml-1 my-2 pa-2">{{ game.overview }}</v-card>
+        <div v-show="game.out_of_stock" class="text-body-1 ml-2 my-2">Out of Stock</div>
+       
       </v-col>
     </v-row>
 
-    <!-- Trailer -->
-    <div class="mx-2 mt-5">
-      <h3 class="mb-3">Trailer</h3>
+    <v-row justify="start" class="space px-16 pb-5">
+      <v-card class="text-body-1 ml-2 my-4 pa-2">{{ game.overview }}</v-card>
+    <div class="mx-2 mt-8">
+      <h4 class="mb-3">Trailer</h4>
       <video
         class="mb-2"
         width="100%"
@@ -31,6 +33,7 @@
         controls
       ></video>
     </div>
+    </v-row>
   </div>
 </template>
 
