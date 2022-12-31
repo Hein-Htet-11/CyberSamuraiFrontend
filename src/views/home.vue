@@ -95,8 +95,14 @@
       <!-- Game List -->
         
           <v-col align-self="start" class="space px-1 pb-5" cols="12" xl="3" sm="8" md="3" offset-md="1" lg="3" offset-lg="1"  v-for="(game, index) in gameList" :key="index">
-              
-            <v-card class="mx-auto rounded-xl" max-width="300" dark flat outlined @click="goToGameDetails(game)" height="500">
+            <v-hover
+        v-slot="{ hover }"
+        close-delay="200"
+      >  
+            <v-card class="mx-auto rounded-xl" 
+            :elevation="hover ? 16 : 2"
+          :class="{ 'on-hover': hover }"
+            max-width="300" dark flat outlined @click="goToGameDetails(game)" height="500">
               
               <v-card-text>
                 
@@ -120,14 +126,6 @@
                 <v-card-title class="grey--text text-grey-darken-1 caption mt-n4">{{ game.platform.name}}</v-card-title>
                 
                 <v-card-actions class="mx-2 mt-n4">
-          <v-btn outlined class="mt-n2 add">
-            <v-icon color="green" @click="decrement"> mdi-minus </v-icon>
-          </v-btn>
-
-          <strong class="white--text mx-2" v-text="bpm"></strong>
-          <v-btn outlined class="mt-n2 add">
-            <v-icon color="green" @click="increment"> mdi-plus </v-icon>
-          </v-btn>
           <v-spacer></v-spacer>
           <v-btn class="mx-2 mt-n3"  fab dark small color="green">
             <v-icon dark> mdi-cart </v-icon>
@@ -139,6 +137,7 @@
         </v-card-actions>
               </v-card-text>
             </v-card>
+            </v-hover>
           </v-col>
           
         
@@ -250,3 +249,9 @@ export default {
   },
 };
 </script>
+<style lang="sass" scoped>
+.v-card.on-hover.theme--dark
+  background-color: rgba(#000, 0.8)
+  >.v-card__text
+    color: #000
+</style>
